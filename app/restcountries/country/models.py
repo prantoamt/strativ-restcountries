@@ -18,7 +18,7 @@ class Country(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Updated At')
 
     class Meta:
-        verbose_name_plural = 'Countries'
+        verbose_name_plural = '1. Countries'
         db_table = 'Country'
 
     def __str__(self) -> str:
@@ -31,7 +31,7 @@ class Language(models.Model):
     name = models.CharField(max_length=256, verbose_name='Name')
 
     class Meta:
-        verbose_name_plural = 'Languages'
+        verbose_name_plural = '2. Languages'
         db_table = 'Language'
 
     def __str__(self) -> str:
@@ -47,7 +47,7 @@ class CountryLanguage(models.Model):
         'country.Language', on_delete=models.CASCADE, verbose_name='Language ID', related_name='countries')
 
     class Meta:
-        verbose_name_plural = 'CountryLanguages'
+        verbose_name_plural = '3. Country Languages'
         db_table = 'CountryLanguage'
 
     def __str__(self) -> str:
@@ -63,7 +63,7 @@ class CountryNeighbour(models.Model):
         'country.Country', on_delete=models.CASCADE, verbose_name='Neighbour Country ID', related_name='neighbour_country_of_country')
 
     class Meta:
-        verbose_name_plural = 'CountryNeighbours'
+        verbose_name_plural = '4. Country Neighbours'
         db_table = 'CountryNeighbour'
 
     def __str__(self) -> str:
