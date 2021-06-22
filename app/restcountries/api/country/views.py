@@ -14,7 +14,7 @@ class CountryViewSet(viewsets.ModelViewSet):
     serializer_class = CountrySerializer
     permission_classes = (AllowAny,)
     lookup_field = 'uuid'
-    http_method_names = ['get', 'post', 'put', 'patch']
+    http_method_names = ['get', 'post', 'put', 'patch', 'delete']
 
     def get_queryset(self):
         kgus = {}
@@ -54,4 +54,12 @@ class CountryViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(instance, data=data, partial=True, context={'request': request})
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response(serializer.data, status=status.HTTP_200_OK)    
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def destroy(self, request, uuid):
+        try:
+            instance = get_object_or_404(Country, id=uuid)
+            self.perform_destroy(instance)
+        except Exception as e:
+            pass
+        return Response(status=status.HTTP_204_NO_CONTENT)
