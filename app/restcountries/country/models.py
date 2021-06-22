@@ -28,7 +28,7 @@ class Country(models.Model):
 class Language(models.Model):
     id = models.UUIDField(db_column='language_id', verbose_name='Language ID',
                           primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=256, verbose_name='Name')
+    name = models.CharField(max_length=256, verbose_name='Name', unique=True)
 
     class Meta:
         verbose_name_plural = '2. Languages'
