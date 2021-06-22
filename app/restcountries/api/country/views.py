@@ -1,3 +1,5 @@
+from django.shortcuts import get_object_or_404
+from rest_framework import serializers
 from rest_framework.response import Response
 from rest_framework import viewsets, status
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -14,9 +16,10 @@ class CountryViewSet(viewsets.ModelViewSet):
     lookup_field = 'uuid'
     http_method_names = ['get', 'post', 'put', 'patch']
 
-    def get_queryset(self, *args, **kwargs):
+    def get_queryset(self):
+        kgus = {}
         content = Content()
-        content.set_countries(**kwargs)
+        content.set_countries(**kgus)
         data = content.get_data()
         return data
 
@@ -36,3 +39,19 @@ class CountryViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def update(self, request, uuid=None):
+        data = request.data.copy()
+        instance = get_object_or_404(Country, id=uuid)
+        serializer = self.get_serializer(instance, data=data, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def partial_update(self, request, uuid=None):
+        data = request.data.copy()
+        instance = get_object_or_404(Country, id=uuid)
+        serializer = self.get_serializer(instance, data=data, partial=True, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)    
