@@ -14,7 +14,8 @@ class Content(object):
             Country.objects.filter(**kgus), many=True).data
 
     def set_country_details(self, **kwargs):
-        country = Country.objects.filter(**kwargs).first()
+        kgus = kwargs.copy()
+        country = Country.objects.filter(**kgus).first()
         if country:
             self.data['country'] = CountrySerializer(country).data
             spoken_languages = CountryLanguage.objects.filter(

@@ -35,7 +35,8 @@ class CountryViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         data = request.data.copy()
-        serializer = self.get_serializer(data=data, context={'request': request})
+        serializer = self.get_serializer(
+            data=data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -43,7 +44,8 @@ class CountryViewSet(viewsets.ModelViewSet):
     def update(self, request, uuid=None):
         data = request.data.copy()
         instance = get_object_or_404(Country, id=uuid)
-        serializer = self.get_serializer(instance, data=data, context={'request': request})
+        serializer = self.get_serializer(
+            instance, data=data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -51,7 +53,8 @@ class CountryViewSet(viewsets.ModelViewSet):
     def partial_update(self, request, uuid=None):
         data = request.data.copy()
         instance = get_object_or_404(Country, id=uuid)
-        serializer = self.get_serializer(instance, data=data, partial=True, context={'request': request})
+        serializer = self.get_serializer(
+            instance, data=data, partial=True, context={'request': request})
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
