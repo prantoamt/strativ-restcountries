@@ -18,6 +18,7 @@ class Country(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Updated At')
 
     class Meta:
+        unique_together = ['name', 'flag']
         verbose_name_plural = '1. Countries'
         db_table = 'Country'
 
