@@ -63,7 +63,6 @@ def get_data() -> None:
     response = requests.get(url)
     data = response.json()
     for item in data:
-        print(len(data))
         country, created = Country.objects.get_or_create(name=item.get('name'), alphacode_2=item.get('alpha2Code'), capital=item.get(
             'capital'), population=item.get('population'), timezone=item.get('timezones')[0], flag=item.get('flag'))
         if created:
