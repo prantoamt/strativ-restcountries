@@ -18,6 +18,8 @@ class CountryViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         kgus = {}
+        if self.request.query_params.get('country_name', None):
+            kgus['name__icontains'] = self.request.query_params.get('country_name')
         content = Content()
         content.set_countries(**kgus)
         data = content.get_data()
@@ -29,7 +31,7 @@ class CountryViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, uuid):
         content = Content()
-        content.set_country_details(**{'id': uuid})
+        content.set_selected_country_details(uuid)
         data = content.get_data()
         return Response(data, status=status.HTTP_200_OK)
 
