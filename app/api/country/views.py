@@ -17,8 +17,8 @@ class CountryViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         kgus = {}
-        if self.request.query_params.get('country_name', None):
-            kgus['name__icontains'] = self.request.query_params.get('country_name')
+        if self.request.query_params.get('name', None):
+            kgus['name__icontains'] = self.request.query_params.get('name')
         content = Content()
         content.set_countries(**kgus)
         data = content.get_data()

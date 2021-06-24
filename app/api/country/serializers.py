@@ -1,6 +1,5 @@
-from django.db import models
 from rest_framework import serializers
-from country.models import Country, Language
+from country.models import Country
 
 
 class CountrySerializer(serializers.ModelSerializer):

@@ -12,7 +12,7 @@ class Content(object):
         '''Sets all countries or queried country's 
         data in instance's data'''
         kgus = kwargs.copy()
-        self.data['countries'] = CountrySerializer(
+        self.data = CountrySerializer(
             Country.objects.filter(**kgus), many=True).data
 
     def set_selected_country_details(self, uuid: str) -> None:
@@ -20,11 +20,11 @@ class Content(object):
         it's languages and neighbours' name in instance's data'''
         country = Country.objects.filter(id=uuid).first()
         if country:
-            self.data['country_details'] = CountrySerializer(country).data
+            self.data = CountrySerializer(country).data
             spoken_languages, neighbour_countries = self.__get_country_languages_and_neighbours(
                 country, **{'spoken_languages': True, 'neighbour_countries': True})
-            self.data['country_details']['languages'] = spoken_languages
-            self.data['country_details']['neighbours'] = neighbour_countries
+            self.data['languages'] = spoken_languages
+            self.data['neighbours'] = neighbour_countries
 
     def set_neighbour_countries_and_their_languages(self, uuid: str, **kwargs) -> None:
         '''Takes uuid of a specific country as an argument and sets it's neighbours and 
