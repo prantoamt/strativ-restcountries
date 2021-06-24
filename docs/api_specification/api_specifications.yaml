@@ -3,20 +3,20 @@ info:
   title: RestCountries API
   version: 1.0.0 ##Major.Minor.bug
 servers:
-  - url: http://127.0.0.1:8080
+  - url: http://127.0.0.1:8000
     description: Local Server
 paths:
   /api/countries/:
     get:
       summary: Retuns a list of countries.
-      description: Retuns a list of countries or queried country.
+      description: Retuns a list of countries or queried country. Country can be searched by 'name' keyword in query params.
       parameters:
         - name: name
           in: query
           required: False
           schema:
             type: string
-            example: Bangladesh
+            example: Afghanistan
       responses:
         "200": # status code
           description: Returns a lis of ccountries or queried country.
@@ -27,7 +27,7 @@ paths:
 
         "401":
           $ref: "#/components/responses/401unauthorized_response"
-          
+
     post:
       summary: Creates a new country instance.
       description: Takes all values of a country object and creates a new country in database.
@@ -57,7 +57,7 @@ paths:
                   type: string
                   example: https://restcountries.eu/data/bd.svg
       responses:
-        '201':
+        "201":
           description: Returns 201 status code if new country is created.
           content:
             application/json:
@@ -85,7 +85,7 @@ paths:
                   flag:
                     type: string
                     example: https://restcountries.eu/data/bd.svg
-        '400':
+        "400":
           description: Returns 400 status code if instance with same name and flag already exists.
           content:
             application/json:
@@ -99,8 +99,8 @@ paths:
                       example: "The fields name, flag must make a unique set."
         "401":
           $ref: "#/components/responses/401unauthorized_response"
-          
-  /api/countries/{country_id}/:    
+
+  /api/countries/{country_id}/:
     get:
       summary: Returns a specific country's detail
       description: Returns all details of a country (the country of country_id ID) including the spoken languages and neighbouring countries name.
@@ -112,50 +112,55 @@ paths:
             type: string
             example: 3ee7f1be-16c6-4a15-b1de-bf175a145c02
       responses:
-        '200':
+        "200":
           description: Returns 200 status code if country details with country_id is found.
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  country_details:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: 8368ac3c-59ea-408e-b9b3-1351ee7ab397
-                      name:
-                        type: string
-                        example: Afghanistan
-                      alphacode_2:
-                        type: string
-                        example: AF
-                      capital:
-                        type: string
-                        example: Kabul
-                      population:
-                        type: integer
-                        example: 27657145
-                      timezone:
-                        type: string
-                        example: UTC+04:3
-                      flag:
-                        type: string
-                        example: https://restcountries.eu/data/afg.svg
-                      languages:
-                        type: array
-                        items:
-                          type: string
-                        example: [Turkmen,Uzbek,Pashto]
-                      neighbours:
-                        type: array
-                        items:
-                          type: string
-                        example: [China, Tajikistan, Uzbekistan, Turkmenistan, Pakistan, Iran (Islamic Republic of)]
+                  id:
+                    type: string
+                    example: 8368ac3c-59ea-408e-b9b3-1351ee7ab397
+                  name:
+                    type: string
+                    example: Afghanistan
+                  alphacode_2:
+                    type: string
+                    example: AF
+                  capital:
+                    type: string
+                    example: Kabul
+                  population:
+                    type: integer
+                    example: 27657145
+                  timezone:
+                    type: string
+                    example: UTC+04:3
+                  flag:
+                    type: string
+                    example: https://restcountries.eu/data/afg.svg
+                  languages:
+                    type: array
+                    items:
+                      type: string
+                    example: [Turkmen, Uzbek, Pashto]
+                  neighbours:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                      [
+                        China,
+                        Tajikistan,
+                        Uzbekistan,
+                        Turkmenistan,
+                        Pakistan,
+                        Iran (Islamic Republic of),
+                      ]
         "401":
-          $ref: "#/components/responses/401unauthorized_response"                
-          
+          $ref: "#/components/responses/401unauthorized_response"
+
     put:
       summary: Updates all fields of an existing country.
       description: Takes all new values of an existing country (the country of country_id ID) and updates the instance accordingly. For updating all fields at once, put request should be performed.
@@ -176,9 +181,9 @@ paths:
                 name:
                   type: string
                   example: Bangladesh (peoples republic)
-                alphacode_2: 
+                alphacode_2:
                   type: string
-                  example: BR  
+                  example: BR
                 capital:
                   type: string
                   example: chittagong
@@ -188,7 +193,7 @@ paths:
                 timezone:
                   type: string
                   example: UTC+7
-                flag:  
+                flag:
                   type: string
                   example: https://restcountries.eu/data/bdg.svg
       responses:
@@ -205,9 +210,9 @@ paths:
                   name:
                     type: string
                     example: Bangladesh (peoples republic)
-                  alphacode_2: 
+                  alphacode_2:
                     type: string
-                    example: BR  
+                    example: BR
                   capital:
                     type: string
                     example: chittagong
@@ -217,12 +222,12 @@ paths:
                   timezone:
                     type: string
                     example: UTC+7
-                  flag:  
+                  flag:
                     type: string
                     example: https://restcountries.eu/data/bdg.svg
         "401":
-          $ref: "#/components/responses/401unauthorized_response"            
-          
+          $ref: "#/components/responses/401unauthorized_response"
+
     patch:
       summary: Updates an existing country partially.
       description: Takes one or multiple new values of an existing country (the country of country_id ID) and updates the instance accordingly. For updating only some fields of a country, patch request should be performed.
@@ -257,9 +262,9 @@ paths:
                   name:
                     type: string
                     example: Bangladesh
-                  alphacode_2: 
+                  alphacode_2:
                     type: string
-                    example: BD  
+                    example: BD
                   capital:
                     type: string
                     example: chittagong
@@ -269,12 +274,12 @@ paths:
                   timezone:
                     type: string
                     example: UTC+6
-                  flag:  
+                  flag:
                     type: string
                     example: https://restcountries.eu/data/bd.svg
         "401":
-          $ref: "#/components/responses/401unauthorized_response"            
-          
+          $ref: "#/components/responses/401unauthorized_response"
+
     delete:
       summary: Deletes an existing country.
       parameters:
@@ -288,8 +293,8 @@ paths:
         "204":
           description: Returns 204 status code if country is deleted.
         "401":
-          $ref: "#/components/responses/401unauthorized_response"  
-      
+          $ref: "#/components/responses/401unauthorized_response"
+
   /api/countries/{country_id}/neighbouring-countries/:
     get:
       summary: Returns list of countries who are country_id's neighbour.
@@ -309,8 +314,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/country"
         "401":
-          $ref: "#/components/responses/401unauthorized_response"        
-                  
+          $ref: "#/components/responses/401unauthorized_response"
+
   /api/languages/{language_id}/countries/:
     get:
       summary: Returns list of countries who speaks the languages_id's language
@@ -329,9 +334,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/country"
         "401":
-          $ref: "#/components/responses/401unauthorized_response"        
-      
-                
+          $ref: "#/components/responses/401unauthorized_response"
+
 components:
   securitySchemes:
     tokenAuth:
@@ -348,55 +352,53 @@ components:
       items:
         type: object
         properties:
-          id: 
+          id:
             type: string
             example: c8eb4d82-627d-4582-aca5-fa98b4ab777c
-          name: 
+          name:
             type: string
             example: China
           alphacode_2:
             type: string
             example: CN
-          capital: 
+          capital:
             type: string
             example: Beijing
           population:
             type: integer
             example: 1377422166
-          timezone: 
+          timezone:
             type: string
             example: UTC+08:00
-          flag: 
+          flag:
             type: string
             example: https://restcountries.eu/data/chn.svg
     countries_schema:
-      type: object
-      properties:
-        countries:
-          type: array
-          items:
-            properties:
-              id:
-                type: string
-                example: 8368ac3c-59ea-408e-b9b3-1351ee7ab397
-              name:
-                type: string
-                example: Afghanistan
-              alphacode_2:
-                type: string
-                example: AF
-              capital:
-                type: string
-                example: Kabul
-              population:
-                type: integer
-                example: 27657145
-              timezone:
-                type: string
-                example: UTC+04:30
-              flag:
-                type: string
-                example: https://restcountries.eu/data/afg.svg  
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            example: 8368ac3c-59ea-408e-b9b3-1351ee7ab397
+          name:
+            type: string
+            example: Afghanistan
+          alphacode_2:
+            type: string
+            example: AF
+          capital:
+            type: string
+            example: Kabul
+          population:
+            type: integer
+            example: 27657145
+          timezone:
+            type: string
+            example: UTC+04:30
+          flag:
+            type: string
+            example: https://restcountries.eu/data/afg.svg
   responses:
     "401unauthorized_response":
       description: Returns 401 status code if user is not authorized.
@@ -404,7 +406,6 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/401unauthorized"
-            
 
 security:
   - tokenAuth: []
