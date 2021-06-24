@@ -1,9 +1,8 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import serializers
 from rest_framework.response import Response
 from rest_framework import viewsets, status
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework.serializers import Serializer
+from rest_framework.decorators import action
 from .serializers import CountrySerializer
 from country.models import Country
 from api.utils.content_object import Content
@@ -24,6 +23,13 @@ class CountryViewSet(viewsets.ModelViewSet):
         content.set_countries(**kgus)
         data = content.get_data()
         return data
+    
+    @action(methods=['get'], detail=True, url_path='neighbouring-countries')
+    def neighbouring_countries(self, request, uuid):
+        content = Content()
+        content.set_neighbour_countries_and_their_languages(uuid, **{'only_neighbour_countries_list': True})
+        data = content.get_data()
+        return Response(data, status=status.HTTP_200_OK)
 
     def list(self, request, *args, **kwargs):
         data = self.get_queryset()
