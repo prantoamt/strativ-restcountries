@@ -1,6 +1,6 @@
 import time
 from django.core.management.base import BaseCommand, CommandError
-from utilities.functions import get_data
+from ._functions import get_data
 
 class Command(BaseCommand):
     '''Django command to populate database with restcountries data.'''
