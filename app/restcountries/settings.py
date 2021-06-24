@@ -25,12 +25,14 @@ SECRET_KEY = 'django-insecure-v_#79jfj$x3h)cruny8b^ol0rz-!x^tz6f4tgiy-=7nuxq!xhb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'administrations',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,8 +44,9 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'country',
-    'administrations',
 ]
+
+AUTH_USER_MODEL = 'administrations.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
