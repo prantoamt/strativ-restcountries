@@ -99,7 +99,7 @@ paths:
                 properties:
                   id:
                     type: string
-                    example: 3ee7f1be-16c6-4a15-b1de-bf175a145c02
+                    example: 153520e2-8412-4450-9e3e-1cb23d5c1daa
                   name:
                     type: string
                     example: Bangladesh
@@ -145,7 +145,7 @@ paths:
           required: True
           schema:
             type: string
-            example: 3ee7f1be-16c6-4a15-b1de-bf175a145c02
+            example: 153520e2-8412-4450-9e3e-1cb23d5c1daa
       responses:
         "200":
           description: Returns 200 status code if country details with country_id is found.
@@ -207,7 +207,7 @@ paths:
           required: True
           schema:
             type: string
-            example: 3ee7f1be-16c6-4a15-b1de-bf175a145c02
+            example: 153520e2-8412-4450-9e3e-1cb23d5c1daa
       requestBody:
         required: True
         content:
@@ -243,7 +243,7 @@ paths:
                 properties:
                   id:
                     type: string
-                    example: 3ee7f1be-16c6-4a15-b1de-bf175a145c02
+                    example: 153520e2-8412-4450-9e3e-1cb23d5c1daa
                   name:
                     type: string
                     example: Bangladesh (peoples republic)
@@ -276,7 +276,7 @@ paths:
           required: True
           schema:
             type: string
-            example: 3ee7f1be-16c6-4a15-b1de-bf175a145c02
+            example: 153520e2-8412-4450-9e3e-1cb23d5c1daa
       requestBody:
         required: True
         content:
@@ -297,7 +297,7 @@ paths:
                 properties:
                   id:
                     type: string
-                    example: 3ee7f1be-16c6-4a15-b1de-bf175a145c02
+                    example: 153520e2-8412-4450-9e3e-1cb23d5c1daa
                   name:
                     type: string
                     example: Bangladesh
@@ -329,7 +329,7 @@ paths:
           required: True
           schema:
             type: string
-            example: 3ee7f1be-16c6-4a15-b1de-bf175a145c02
+            example: 153520e2-8412-4450-9e3e-1cb23d5c1daa
       responses:
         "204":
           description: Returns 204 status code if country is deleted.
@@ -348,7 +348,7 @@ paths:
           required: True
           schema:
             type: string
-            example: 3ee7f1be-16c6-4a15-b1de-bf175a145c02
+            example: 153520e2-8412-4450-9e3e-1cb23d5c1daa
       responses:
         "200":
           description: Returns 200 status code if content found.
