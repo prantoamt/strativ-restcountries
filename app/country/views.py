@@ -1,13 +1,15 @@
-from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views import generic
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 from .models import Country
 from api.utils.content_object import Content
 # Create your views here.
 
 
 class CountryListView(SuccessMessageMixin, LoginRequiredMixin, generic.ListView):
+    login_url = '/admin/login/'
     model = Country
     contect_object_name = "country_list"
     template_name = "country/country_list.html"
@@ -27,6 +29,7 @@ class CountryListView(SuccessMessageMixin, LoginRequiredMixin, generic.ListView)
 
 
 class CountryDetailView(SuccessMessageMixin, LoginRequiredMixin, generic.DetailView):
+    login_url = '/admin/login/'
     model = Country
     template_name = "country/country_detail.html"
     # paginate_by = 10
@@ -43,3 +46,8 @@ class CountryDetailView(SuccessMessageMixin, LoginRequiredMixin, generic.DetailV
         content.set_neighbour_countries_and_their_languages(object_id)
         context['details'] = content.get_data()
         return context
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('/admin/login/')
