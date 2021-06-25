@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+            Rest Countries
+        {% endblock title %}
+    </title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/img/favicon.png">
+
+    {% include 'partials/_css.html' %}
+
+    {% block style %}
+        
+    {% endblock style %}
+</head>
+<body>
+    <div id="main-wrapper" class="main-wrapper">
+        {% block header %}
+            {% include 'partials/_header.html' %}
+        {% endblock %}
+        <div class="page-wrapper" style="margin-left:auto">
+                <div class="content container-fluid">
+                    {% block page_header %}
+                        <!-- Page Header -->
+                        {% include 'partials/_page_header.html' %}
+                        <!-- /Page Header -->
+                    {% endblock %}
+                    <div class="row">
+                        <div class="col-sm-12">
+                            
+                            {% block content %}
+                            
+                            {% endblock content %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    {% include 'partials/_js.html' %}
+    
+    {% block script %}
+        
+    {% endblock script %}
+
+</body>
+</html>

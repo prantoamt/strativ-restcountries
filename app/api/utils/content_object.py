@@ -34,20 +34,23 @@ class Content(object):
         kgus = kwargs.copy()
         country_neighbours_qs = CountryNeighbour.objects.select_related('neighbour_country_id').filter(
             country_id__id=uuid)
-        self.data = []
         # if kgus.get('only_neighbour_countries_list', None):
         #     self.data['neighbouring_countries'] = CountrySerializer(
         #         neighbour_countries.neighbour_country_id, many=True).data
         #     return
+        data = []
         for country in country_neighbours_qs:
             if kgus.get('only_neighbour_countries_list', None):
-                self.data.append(CountrySerializer(
+                data.append(CountrySerializer(
                 country.neighbour_country_id).data)
                 continue
             spoken_languages, neighbours = self.__get_country_languages_and_neighbours(
                 country.neighbour_country_id, **{'spoken_languages': True})
             self.data[country.neighbour_country_id.name] = {
                 'spoken_languages': spoken_languages}
+        if kgus.get('only_neighbour_countries_list', None):
+            self.data = data        
+
 
     def __get_country_languages_and_neighbours(self, country :object, **kwargs) -> tuple:
         '''Takes country object and returns it's spoken languages and/or neighbours.

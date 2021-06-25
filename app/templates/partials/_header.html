@@ -1,0 +1,33 @@
+{% load static %}
+{% include 'partials/_js.html' %}
+<div class="header header-css">
+
+    <!-- Logo -->
+    <div class="header-left">
+
+    </div>
+    <!-- /Logo -->
+
+    <!-- Sidebar Toggle -->
+    <a href="#" id="toggle_btn">
+        <i class="fas fa-bars"></i>
+    </a>
+
+    <ul class="nav user-menu">
+
+        <!-- User Menu -->
+        <li class="nav-item dropdown has-arrow main-drop">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                <span>{{user.username}}</span>
+            </a>
+            <div class="dropdown-menu dropdown-nav-css">
+
+                <a class="dropdown-item" href="#"><i data-feather="log-out" class="mr-1"></i> Logout</a>
+            </div>
+        </li>
+        <!-- /User Menu -->
+
+    </ul>
+    <!-- /Header Menu -->
+
+</div>
