@@ -11,7 +11,7 @@ from api.utils.content_object import Content
 class CountryViewSet(viewsets.ModelViewSet):
     model = Country
     serializer_class = CountrySerializer
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
     lookup_field = 'uuid'
     http_method_names = ['get', 'post', 'put', 'patch', 'delete']
 

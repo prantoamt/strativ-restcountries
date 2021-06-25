@@ -9,7 +9,7 @@ from api.utils.content_object import Content
 class LanguageViewSet(viewsets.ModelViewSet):
     model = Language
     serializer_class = LanguageSerializer
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
     lookup_field = 'uuid'
     http_method_names = ['get']
 

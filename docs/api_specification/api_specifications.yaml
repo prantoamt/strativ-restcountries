@@ -6,8 +6,39 @@ servers:
   - url: http://127.0.0.1:8000
     description: Local Server
 paths:
+  /api/api-token-auth/:
+    post:
+      summary: Returns token key of user
+      description: Perform a post request with valid username and password to get Token key for that user in order to view data.
+      requestBody:
+        required: True
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: admin
+                password:
+                    type: string
+                    example: p123p123
+      responses:
+        "200":
+          description: Returns the Token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: d46828fb1f0325bf46b7a6de78880aef5557daa9              
+
   /api/countries/:
     get:
+      security:
+        - api_key: []
       summary: Retuns a list of countries.
       description: Retuns a list of countries or queried country. Country can be searched by 'name' keyword in query params.
       parameters:
@@ -29,6 +60,8 @@ paths:
           $ref: "#/components/responses/401unauthorized_response"
 
     post:
+      security:
+        - api_key: []
       summary: Creates a new country instance.
       description: Takes all values of a country object and creates a new country in database.
       requestBody:
@@ -102,6 +135,8 @@ paths:
 
   /api/countries/{country_id}/:
     get:
+      security:
+        - api_key: []
       summary: Returns a specific country's detail
       description: Returns all details of a country (the country of country_id ID) including the spoken languages and neighbouring countries name.
       parameters:
@@ -162,6 +197,8 @@ paths:
           $ref: "#/components/responses/401unauthorized_response"
 
     put:
+      security:
+        - api_key: []
       summary: Updates all fields of an existing country.
       description: Takes all new values of an existing country (the country of country_id ID) and updates the instance accordingly. For updating all fields at once, put request should be performed.
       parameters:
@@ -229,6 +266,8 @@ paths:
           $ref: "#/components/responses/401unauthorized_response"
 
     patch:
+      security:
+        - api_key: []
       summary: Updates an existing country partially.
       description: Takes one or multiple new values of an existing country (the country of country_id ID) and updates the instance accordingly. For updating only some fields of a country, patch request should be performed.
       parameters:
@@ -281,6 +320,8 @@ paths:
           $ref: "#/components/responses/401unauthorized_response"
 
     delete:
+      security:
+        - api_key: []
       summary: Deletes an existing country.
       parameters:
         - name: country_id
@@ -297,6 +338,8 @@ paths:
 
   /api/countries/{country_id}/neighbouring-countries/:
     get:
+      security:
+        - api_key: []
       summary: Returns list of countries who are country_id's neighbour.
       description: Takes country's id (country_id) in path and returns its neighbouring country list.
       parameters:
@@ -318,6 +361,8 @@ paths:
 
   /api/languages/{language_id}/countries/:
     get:
+      security:
+        - api_key: []
       summary: Returns list of countries who speaks the languages_id's language
       parameters:
         - name: language_id
@@ -325,7 +370,7 @@ paths:
           required: True
           schema:
             type: string
-            example: b7f514ca-22de-4152-bd10-9009febe67e9
+            example: f54ad185-a501-44e7-a464-64a6e849eed0
       responses:
         "200":
           description: Returns 200 status code if content found.
@@ -338,14 +383,19 @@ paths:
 
 components:
   securitySchemes:
-    tokenAuth:
-      type: http
-      scheme: bearer
+    api_key:
+      type: apiKey
+      description: API key to authorize requests.
+      name: Authorization
+      in: header
 
   schemas:
     401unauthorized:
-      type: string
-      example: Authorization credentials were not provided.
+      type: object
+      properties:
+        detail:
+          type: string
+          example: Authorization credentials were not provided.
 
     country:
       type: array
@@ -408,4 +458,4 @@ components:
             $ref: "#/components/schemas/401unauthorized"
 
 security:
-  - tokenAuth: []
+  - api_key: []

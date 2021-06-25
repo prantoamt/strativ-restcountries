@@ -34,14 +34,14 @@ class Content(object):
         kgus = kwargs.copy()
         country_neighbours_qs = CountryNeighbour.objects.select_related('neighbour_country_id').filter(
             country_id__id=uuid)
-        self.data['neigbouring_countries'] = []
+        self.data = []
         # if kgus.get('only_neighbour_countries_list', None):
         #     self.data['neighbouring_countries'] = CountrySerializer(
         #         neighbour_countries.neighbour_country_id, many=True).data
         #     return
         for country in country_neighbours_qs:
             if kgus.get('only_neighbour_countries_list', None):
-                self.data['neigbouring_countries'].append(CountrySerializer(
+                self.data.append(CountrySerializer(
                 country.neighbour_country_id).data)
                 continue
             spoken_languages, neighbours = self.__get_country_languages_and_neighbours(
