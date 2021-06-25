@@ -8,6 +8,7 @@
     + [Create virtual environment and install all required packages](#create-virtual-environment-and-install-all-required-packages)
     + [Run the project](#run-the-project)
     + [See project in action](#see-project-in-action)
+- [Database](#database)
 - [Api](#api)
     + [`/api/api-token-auth/`](#--api-api-token-auth--)
     + [`/api/countries/`](#--api-countries--)
@@ -71,6 +72,11 @@ chmod +x ./run.sh
 Congratulations! you have successfully run the project in development server. You can access the project at `8000` port.
 Open your browser and goto the url: `127.0.0.1:8000/countries/`, You will be redirected to Login page. Please use: `username: admin` and `password:p123p123`. After successfull login, you will be redirected to country list page where you can test your requirements.
 
+# Database:
+  As mentioned earlier, for this project SQLite database has been used. An ER diagram of this project is provided below:
+  <p align="center">
+  <img src="https://github.com/prantoamt/strativ-restcountries/blob/main/docs/database_diagrams/Database%20ER%20diagram.png" title="hover text">
+</p>
 
 # Api
 -----
@@ -113,5 +119,12 @@ curl -X GET http://127.0.0.1:8000/api/countries/ -H 'Authorization: Token d46828
 ```
 
 ## Api Specifications
-A full api-specifications of all end-points are provied in [docs/api_specifications/api_specifications.yaml](https://github.com/prantoamt/strativ-restcountries/blob/main/docs/api_specification/api_specifications.yaml). It is written in `openapi: 3.0.0`.
+A full api-specifications of all end-points are provied in [docs/api_specifications/api_specifications.yaml](https://github.com/prantoamt/strativ-restcountries/blob/main/docs/api_specification/api_specifications.yaml). It is written in `openapi: 3.0.0`. You can preview this on your VS CODE as well.
+ - Open the file in your VS Code.
+ - Goto extensions.
+ - Search for Swagger Viewer.
+ - Install and enable it.
+ - Get back to the api_specifications.yaml
+ - Right click in api_specifications.yaml file on the left sidebar of your VS code.
+ - Click on Preview Swagger.
 
